@@ -15,9 +15,8 @@ final class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let anime = Array(animeData.values)[indexPath.row]
-        
         var configuration = cell.defaultContentConfiguration()
-        configuration.text = anime.title
+        configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId)"
         configuration.secondaryText = anime.synopsis
         cell.contentConfiguration = configuration
         
@@ -47,11 +46,9 @@ final class ViewController: UIViewController, UITableViewDataSource {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        
-        
-        
-        
-        let anime_url: URL = URL(string: "https://api.jikan.moe/v4/anime/5680")!
+        let random_id = Int.random(in: 1...5680)
+        print(random_id)
+        let anime_url: URL = URL(string: "https://api.jikan.moe/v4/anime/\(random_id)")!
 //        let episodes_url: URL = URL(string: "https://api.jikan.moe/v4/anime/5680/episodes")!
         
         URLSession.shared.dataTask(with: anime_url, completionHandler: { data, response, error in
@@ -65,6 +62,7 @@ final class ViewController: UIViewController, UITableViewDataSource {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             self.animeData = try! decoder.decode([String: Anime].self, from: data)
+            print(self.animeData)
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -92,15 +90,15 @@ final class ViewController: UIViewController, UITableViewDataSource {
 
 
 struct Anime: Decodable {
-    let malId: Int?
-    let url: URL?
+    let malId: Int
+    let url: URL
     let images: Images?
     let trailer: Trailer?
     let approved: Bool?
     let titles: [Title]?
-    let title: String?
+    let title: String
     let titleEnglish: String?
-    let titleJapanese: String?
+    let titleJapanese: String
     let titleSynonyms: [String]?
     let type: String?
     let source: String?
@@ -223,26 +221,26 @@ struct Demographic: Decodable {
 }
 
 
-//struct EpisodesData: Decodable {
-////    let pagination: Pagination
-//    let data: [Episode]
-//
-////    struct Pagination: Decodable {
-////        let last_visible_page: Int?
-////        let has_next_page: Bool?
-////    }
-//
-//    struct Episode: Decodable {
-//        let mal_id: Int?
-//        let url: String?
-//        let title: String?
-//        let title_japanese: String?
-//        let title_romanji: String?
-//        let aired: String?
-//        let score: Double?
-//        let filler: Bool?
-//        let recap: Bool?
-//        let forum_url: String?
+struct EpisodesData: Decodable {
+//    let pagination: Pagination
+    let data: [Episode]
+
+//    struct Pagination: Decodable {
+//        let last_visible_page: Int?
+//        let has_next_page: Bool?
 //    }
-//}
+
+    struct Episode: Decodable {
+        let mal_id: Int?
+        let url: String?
+        let title: String?
+        let title_japanese: String?
+        let title_romanji: String?
+        let aired: String?
+        let score: Double?
+        let filler: Bool?
+        let recap: Bool?
+        let forum_url: String?
+    }
+}
 
