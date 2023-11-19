@@ -18,8 +18,8 @@ final class ViewController: UIViewController, UITableViewDataSource {
 //        let genreData = Array(anime.genres)
 //        print(genreData)
         var configuration = cell.defaultContentConfiguration()
-        configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId)"
-//        configuration.secondaryText = anime.synopsis
+        configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId) / Genre: \(anime.genres?.first?.name ?? "N/A")"
+        configuration.secondaryText = anime.synopsis
         
 //        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40)]
         
