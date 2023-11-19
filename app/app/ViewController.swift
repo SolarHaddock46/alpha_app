@@ -15,9 +15,14 @@ final class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let anime = Array(animeData.values)[indexPath.row]
+//        let genreData = Array(anime.genres)
+//        print(genreData)
         var configuration = cell.defaultContentConfiguration()
         configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId)"
-        configuration.secondaryText = anime.synopsis
+//        configuration.secondaryText = anime.synopsis
+        
+//        let attributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 40)]
+        
         cell.contentConfiguration = configuration
         
         return cell
@@ -32,6 +37,7 @@ final class ViewController: UIViewController, UITableViewDataSource {
     }()
     
     private var animeData: [String: Anime] = [:]
+//    private var genreData: [Genre] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,9 +52,8 @@ final class ViewController: UIViewController, UITableViewDataSource {
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
-        let random_id = Int.random(in: 1...5680)
-        print(random_id)
-        let anime_url: URL = URL(string: "https://api.jikan.moe/v4/anime/\(random_id)")!
+//        let random_id = Int.random(in: 1...5680)
+        let anime_url: URL = URL(string: "https://api.jikan.moe/v4/random/anime")!
 //        let episodes_url: URL = URL(string: "https://api.jikan.moe/v4/anime/5680/episodes")!
         
         URLSession.shared.dataTask(with: anime_url, completionHandler: { data, response, error in
@@ -128,97 +133,97 @@ struct Anime: Decodable {
     let demographics: [Demographic]?
 }
 
-struct Images: Decodable {
-    let jpg: ImageType?
-    let webp: ImageType?
-}
+    struct Images: Decodable {
+        let jpg: ImageType?
+        let webp: ImageType?
+    }
 
-struct ImageType: Decodable {
-    let imageUrl: URL?
-    let smallImageUrl: URL?
-    let largeImageUrl: URL?
-}
-
-struct Trailer: Decodable {
-    let youtubeId: String?
-    let url: URL?
-    let embedUrl: URL?
-    let images: TrailerImages?
-
-    struct TrailerImages: Decodable {
+    struct ImageType: Decodable {
         let imageUrl: URL?
         let smallImageUrl: URL?
-        let mediumImageUrl: URL?
         let largeImageUrl: URL?
-        let maximumImageUrl: URL?
     }
-}
 
-struct Title: Decodable {
-    let type: String?
-    let title: String?
-}
+    struct Trailer: Decodable {
+        let youtubeId: String?
+        let url: URL?
+        let embedUrl: URL?
+        let images: TrailerImages?
 
-struct Aired: Decodable {
-    let from: String?
-    let to: String?
-    let prop: AiredProp?
-    let string: String?
-
-    struct AiredProp: Decodable {
-        let from: DateComponents?
-        let to: DateComponents?
+        struct TrailerImages: Decodable {
+            let imageUrl: URL?
+            let smallImageUrl: URL?
+            let mediumImageUrl: URL?
+            let largeImageUrl: URL?
+            let maximumImageUrl: URL?
+        }
     }
-}
 
-struct Broadcast: Decodable {
-    let day: String?
-    let time: String?
-    let timezone: String?
-    let string: String?
-}
+    struct Title: Decodable {
+        let type: String?
+        let title: String?
+    }
 
-struct Producer: Decodable {
-    let malId: Int?
-    let type: String?
-    let name: String?
-    let url: URL?
-}
+    struct Aired: Decodable {
+        let from: String?
+        let to: String?
+        let prop: AiredProp?
+        let string: String?
 
-struct Licensor: Decodable {
-    let malId: Int?
-    let type: String?
-    let name: String?
-    let url: URL?
-}
+        struct AiredProp: Decodable {
+            let from: DateComponents?
+            let to: DateComponents?
+        }
+    }
 
-struct Studio: Decodable {
-    let malId: Int?
-    let type: String?
-    let name: String?
-    let url: URL?
-}
+    struct Broadcast: Decodable {
+        let day: String?
+        let time: String?
+        let timezone: String?
+        let string: String?
+    }
 
-struct Genre: Decodable {
-    let malId: Int?
-    let type: String?
-    let name: String?
-    let url: URL?
-}
+    struct Producer: Decodable {
+        let malId: Int?
+        let type: String?
+        let name: String?
+        let url: URL?
+    }
 
-struct Theme: Decodable {
-    let malId: Int?
-    let type: String?
-    let name: String?
-    let url: URL?
-}
+    struct Licensor: Decodable {
+        let malId: Int?
+        let type: String?
+        let name: String?
+        let url: URL?
+    }
 
-struct Demographic: Decodable {
-    let malId: Int?
-    let type: String?
-    let name: String?
-    let url: URL?
-}
+    struct Studio: Decodable {
+        let malId: Int?
+        let type: String?
+        let name: String?
+        let url: URL?
+    }
+
+    struct Genre: Decodable {
+        let malId: Int?
+        let type: String?
+        let name: String?
+        let url: URL?
+    }
+
+    struct Theme: Decodable {
+        let malId: Int?
+        let type: String?
+        let name: String?
+        let url: URL?
+    }
+
+    struct Demographic: Decodable {
+        let malId: Int?
+        let type: String?
+        let name: String?
+        let url: URL?
+    }
 
 
 struct EpisodesData: Decodable {
