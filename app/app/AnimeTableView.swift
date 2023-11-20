@@ -3,8 +3,11 @@ import UIKit
 final class AnimeTableView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
+        tableView.dataSource = tableManager
         return tableView
     }()
+    
+    private lazy var tableManager = AnimeTableManager()
     
     init() {
         super.init(frame: .zero)
@@ -15,6 +18,11 @@ final class AnimeTableView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func configure(with viewModel: [String: Anime]) {
+        tableManager.tableData = viewModel
+        tableView.reloadData()
     }
     
 }

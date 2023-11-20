@@ -9,17 +9,17 @@ import Foundation
 import UIKit
 
 final class AnimeTableManager: NSObject {
-    var animeData: [String: Anime] = [:]
+    var tableData: [String: Anime] = [:]
 }
 
 extension AnimeTableManager: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return animeData.values.count
+        return tableData.values.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let anime = Array(animeData.values)[indexPath.row]
+        let anime = Array(tableData.values)[indexPath.row]
         var configuration = cell.defaultContentConfiguration()
         configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId) / Genre: \(anime.genres?.first?.name ?? "N/A")"
         configuration.secondaryText = anime.synopsis
