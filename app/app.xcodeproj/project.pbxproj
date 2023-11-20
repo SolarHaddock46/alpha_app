@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3324005D2B0B69B300D621C5 /* AnimeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3324005C2B0B69B300D621C5 /* AnimeData.swift */; };
 		33E9BB5B2AD01EE600DBC8D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9BB5A2AD01EE600DBC8D5 /* AppDelegate.swift */; };
 		33E9BB5D2AD01EE600DBC8D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9BB5C2AD01EE600DBC8D5 /* SceneDelegate.swift */; };
 		33E9BB5F2AD01EE600DBC8D5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9BB5E2AD01EE600DBC8D5 /* ViewController.swift */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3324005C2B0B69B300D621C5 /* AnimeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeData.swift; sourceTree = "<group>"; };
 		33E9BB572AD01EE600DBC8D5 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E9BB5A2AD01EE600DBC8D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33E9BB5C2AD01EE600DBC8D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,6 +37,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3324005B2B0B699500D621C5 /* AnimeTable */ = {
+			isa = PBXGroup;
+			children = (
+				3324005C2B0B69B300D621C5 /* AnimeData.swift */,
+			);
+			name = AnimeTable;
+			sourceTree = "<group>";
+		};
 		33E9BB4E2AD01EE600DBC8D5 = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +64,7 @@
 		33E9BB592AD01EE600DBC8D5 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				3324005B2B0B699500D621C5 /* AnimeTable */,
 				33E9BB5A2AD01EE600DBC8D5 /* AppDelegate.swift */,
 				33E9BB5C2AD01EE600DBC8D5 /* SceneDelegate.swift */,
 				33E9BB5E2AD01EE600DBC8D5 /* ViewController.swift */,
@@ -136,6 +147,7 @@
 			files = (
 				33E9BB5F2AD01EE600DBC8D5 /* ViewController.swift in Sources */,
 				33E9BB5B2AD01EE600DBC8D5 /* AppDelegate.swift in Sources */,
+				3324005D2B0B69B300D621C5 /* AnimeData.swift in Sources */,
 				33E9BB5D2AD01EE600DBC8D5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
