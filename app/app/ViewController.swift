@@ -73,37 +73,5 @@ private var animeData: [String: Anime] = [:]
         // Show spinner while loading data
         spinner.startAnimating()
 
-        let anime_url: URL = URL(string: "https://api.jikan.moe/v4/random/anime")!
-        
-        URLSession.shared.dataTask(with: anime_url) { data, response, error in
-            defer {
-                // Stop spinner on main thread after data task completion
-                DispatchQueue.main.async {
-                    self.spinner.stopAnimating()
-                }
-            }
-            
-            guard
-                let data = data,
-                let response,
-                error == nil
-            else {
-                return
-            }
-
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-
-            do {
-                self.animeData = try decoder.decode([String: Anime].self, from: data)
-                print(self.animeData)
-
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-            } catch {
-                print("Error decoding data: \(error)")
-            }
-        }.resume()
     }
 }
