@@ -1,9 +1,10 @@
 import UIKit
+import Foundation
 
 final class AnimeTableView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.dataSource = tableManager
+        tableView.dataSource = tableManager as! any UITableViewDataSource
         return tableView
     }()
     
@@ -21,7 +22,7 @@ final class AnimeTableView: UIView {
     }
     
     func configure(with viewModel: [String: Anime]) {
-        tableManager.tableData = viewModel
+        tableManager.animeData = viewModel
         tableView.reloadData()
     }
     

@@ -7,9 +7,12 @@
 
 import Foundation
 
+protocol AnimeServicing {
+    func fetchAnime(completionHandler: @escaping ((([Anime]) -> Void)))
+}
+
 final class AnimeService {
     let url: URL = URL(string: "https://api.jikan.moe/v4/random/anime")!
-    
     let decoder: JSONDecoder = {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -20,21 +23,11 @@ final class AnimeService {
         let session = URLSession(configuration: sessionConfiguration)
         return session
     }()
-    
-    
+}
+extension AnimeService: AnimeServicing {
     func fetchAnime(completionHandler: @escaping ((([Anime]) -> Void))) {
-        
         let anime_url: URL = URL(string: "https://api.jikan.moe/v4/random/anime")!
-        
-        
         URLSession.shared.dataTask(with: anime_url) { data, response, error in
-//            defer {
-//                // Stop spinner on main thread after data task completion
-//                DispatchQueue.main.async {
-//                    self.spinner.stopAnimating()
-//                }
-//            }
-            
             guard
                 let data = data,
                 let response,
@@ -42,12 +35,8 @@ final class AnimeService {
             else {
                 return
             }
-            
-            let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
-            
             do {
-                let animeData = try decoder.decode([String: Anime].self, from: data)
+                let animeData = try! self.decoder.decode([String: Anime].self, from: data)
                 print(animeData)
             } catch {
                 print("Error decoding data: \(error)")
