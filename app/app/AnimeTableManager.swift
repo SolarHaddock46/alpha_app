@@ -1,10 +1,3 @@
-//
-//  AnimeTableManager.swift
-//  app
-//
-//  Created by Владимир Мацнев on 20.11.2023.
-//
-
 import Foundation
 import UIKit
 
@@ -18,8 +11,8 @@ extension AnimeTableManager: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let anime = Array(animeData.values)[indexPath.row]
+        var cell = UITableViewCell()
         var configuration = cell.defaultContentConfiguration()
         configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId) / Genre: \(anime.genres?.first?.name ?? "N/A")"
         configuration.secondaryText = anime.synopsis

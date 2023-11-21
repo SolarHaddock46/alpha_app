@@ -1,14 +1,7 @@
-//
-//  AnimeService.swift
-//  app
-//
-//  Created by Владимир Мацнев on 20.11.2023.
-//
-
 import Foundation
 
 protocol AnimeServicing {
-    func fetchAnime(completionHandler: @escaping ((([Anime]) -> Void)))
+    func fetchAnime(completionHandler: @escaping ((([String: Anime]) -> Void)))
 }
 
 final class AnimeService {
@@ -25,7 +18,7 @@ final class AnimeService {
     }()
 }
 extension AnimeService: AnimeServicing {
-    func fetchAnime(completionHandler: @escaping ((([Anime]) -> Void))) {
+    func fetchAnime(completionHandler: @escaping ((([String: Anime]) -> Void))) {
         let anime_url: URL = URL(string: "https://api.jikan.moe/v4/random/anime")!
         URLSession.shared.dataTask(with: anime_url) { data, response, error in
             guard
@@ -37,6 +30,7 @@ extension AnimeService: AnimeServicing {
             }
             do {
                 let animeData = try! self.decoder.decode([String: Anime].self, from: data)
+                completionHandler(animeData)
                 print(animeData)
             } catch {
                 print("Error decoding data: \(error)")
