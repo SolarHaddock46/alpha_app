@@ -37,6 +37,8 @@ final class AnimeTableViewController: UIViewController {
 
 extension AnimeTableViewController: AnimeTableViewDelegate {
     func didSelectRow(_ animeModel: [String: Anime]) {
-        
+        let vc = AnimeDetailsViewController()
+        vc.animeModel = animeModel
+        present(vc, animated: true)
     }
 }

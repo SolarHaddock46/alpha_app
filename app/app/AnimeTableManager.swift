@@ -20,8 +20,8 @@ extension AnimeTableManager: UITableViewDataSource {
         let anime = Array(animeData.values)[indexPath.row]
         var cell = UITableViewCell()
         var configuration = cell.defaultContentConfiguration()
-        configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId) / Genre: \(anime.genres?.first?.name ?? "N/A")"
-        configuration.secondaryText = anime.synopsis
+        configuration.text = "\(anime.title)"
+        configuration.secondaryText = "Genre: \(anime.genres?.first?.name ?? "N/A")"
         cell.contentConfiguration = configuration
         return cell
     }
