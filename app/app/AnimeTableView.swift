@@ -14,6 +14,7 @@ final class AnimeTableView: UIView {
         return tableView
     }()
     
+    private lazy var spinnerView = UIActivityIndicatorView(style: .large)
     private lazy var tableManager = AnimeTableManager()
     var delegate: AnimeTableViewDelegate?
     
@@ -22,6 +23,7 @@ final class AnimeTableView: UIView {
         self.backgroundColor = .white
         addSubviews()
         makeConstraints()
+        spinnerView.startAnimating()
         tableManager.delegate = self
     }
     
@@ -31,6 +33,7 @@ final class AnimeTableView: UIView {
     
     func configure(with viewModel: [String: Anime]) {
         tableManager.animeData = viewModel
+        spinnerView.stopAnimating()
         tableView.reloadData()
     }
     
@@ -45,12 +48,12 @@ extension AnimeTableView: AnimeTableManagerDelegate {
 
 private extension AnimeTableView {
     func addSubviews() {
-        [tableView].forEach {
+        [tableView, spinnerView].forEach {
             self.addSubview($0)
         }
     }
     func makeConstraints() {
-        [tableView].forEach {
+        [tableView, spinnerView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         NSLayoutConstraint.activate([
@@ -58,6 +61,8 @@ private extension AnimeTableView {
             tableView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor),
             tableView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
+            spinnerView.centerXAnchor.constraint(equalTo: tableView.centerXAnchor),
+            spinnerView.centerYAnchor.constraint(equalTo: tableView.centerYAnchor)
         ])
     }
     

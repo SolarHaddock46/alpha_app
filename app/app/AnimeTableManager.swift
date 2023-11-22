@@ -21,7 +21,7 @@ extension AnimeTableManager: UITableViewDataSource {
         var cell = UITableViewCell()
         var configuration = cell.defaultContentConfiguration()
         configuration.text = "\(anime.title)"
-        configuration.secondaryText = "Genre: \(anime.genres?.first?.name ?? "N/A")"
+        configuration.secondaryText = "Genre: \(anime.genres?.first?.name ?? "N/A") / Episodes: \(anime.episodes ?? 0)"
         cell.contentConfiguration = configuration
         return cell
     }
