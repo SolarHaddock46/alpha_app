@@ -11,16 +11,21 @@ final class AnimeService {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
-    let session: URLSession = {
+    var session: URLSession?
+    init() {
+        configureSession()
+    }
+
+    private func configureSession() {
         let sessionConfiguration = URLSessionConfiguration.default
-        let session = URLSession(configuration: sessionConfiguration)
-        return session
-    }()
+        session = URLSession(configuration: sessionConfiguration)
+    }
 }
 extension AnimeService: AnimeServicing {
     func fetchAnime(completionHandler: @escaping ((([String: Anime]) -> Void))) {
         let anime_url: URL = URL(string: "https://api.jikan.moe/v4/random/anime")!
-        URLSession.shared.dataTask(with: anime_url) { data, response, error in
+        guard let session = session else {return}
+        session.dataTask(with: anime_url) { data, response, error in
             guard
                 let data = data,
                 let response,
@@ -28,14 +33,19 @@ extension AnimeService: AnimeServicing {
             else {
                 return
             }
-            do {
-                let animeData = try! self.decoder.decode([String: Anime].self, from: data)
-                completionHandler(animeData)
-                print(animeData)
-            } catch {
-                print("Error decoding data: \(error)")
+            let animeData = try! self.decoder.decode([String: Anime].self, from: data)
+            if let anime = animeData.values.first, let genreData = anime.genres, genreData.contains(where: { $0.name == "Hentai" || $0.name == "Ecchi" })  {
+                print("Content filtered.")
+                self.restartSession()
+                return
             }
+            completionHandler(animeData)
+            print(animeData)
         }.resume()
+    }
+    private func restartSession() {
+        session?.finishTasksAndInvalidate()
+        configureSession()
     }
 }
 

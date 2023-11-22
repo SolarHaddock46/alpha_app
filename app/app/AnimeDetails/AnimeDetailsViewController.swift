@@ -71,9 +71,8 @@ class AnimeDetailsViewController: UIViewController {
     
     func configure() {
         let anime = Array(animeModel.values)[0]
-        
         titleView.font = UIFont.systemFont(ofSize: 16)
-        titleView.numberOfLines = 4
+        titleView.numberOfLines = 5
         synopsisView.font = UIFont.systemFont(ofSize: 16)
         synopsisView.numberOfLines = 0
         
@@ -87,7 +86,7 @@ class AnimeDetailsViewController: UIViewController {
             }
         }
         
-        titleView.text = "\(anime.title)\n\(anime.titleJapanese)\nMAL ID: \(anime.malId)\nGenre: \(anime.genres?.first?.name ?? "N/A")"
+        titleView.text = "\(anime.title)\n\(anime.titleJapanese)\nEpisodes: \(anime.episodes ?? 0)\nGenre: \(anime.genres?.first?.name ?? "N/A")\nDescription:"
         synopsisView.text = anime.synopsis
     }
 }
