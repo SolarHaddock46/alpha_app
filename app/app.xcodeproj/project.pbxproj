@@ -13,6 +13,7 @@
 		332400632B0B8D3200D621C5 /* AnimeTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332400622B0B8D3200D621C5 /* AnimeTableView.swift */; };
 		332400662B0B8E7200D621C5 /* AnimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332400652B0B8E7200D621C5 /* AnimeTableViewController.swift */; };
 		3324006A2B0CB73B00D621C5 /* AnimeTableViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332400692B0CB73B00D621C5 /* AnimeTableViewControllerFactory.swift */; };
+		33BFFC5E2B0DED45000F4270 /* AnimeDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33BFFC5D2B0DED45000F4270 /* AnimeDetailsViewController.swift */; };
 		33E9BB5B2AD01EE600DBC8D5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9BB5A2AD01EE600DBC8D5 /* AppDelegate.swift */; };
 		33E9BB5D2AD01EE600DBC8D5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E9BB5C2AD01EE600DBC8D5 /* SceneDelegate.swift */; };
 		33E9BB642AD01EE800DBC8D5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33E9BB632AD01EE800DBC8D5 /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		332400622B0B8D3200D621C5 /* AnimeTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeTableView.swift; sourceTree = "<group>"; };
 		332400652B0B8E7200D621C5 /* AnimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeTableViewController.swift; sourceTree = "<group>"; };
 		332400692B0CB73B00D621C5 /* AnimeTableViewControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeTableViewControllerFactory.swift; sourceTree = "<group>"; };
+		33BFFC5D2B0DED45000F4270 /* AnimeDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimeDetailsViewController.swift; sourceTree = "<group>"; };
 		33E9BB572AD01EE600DBC8D5 /* app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = app.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E9BB5A2AD01EE600DBC8D5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		33E9BB5C2AD01EE600DBC8D5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 			name = AnimeTable;
 			sourceTree = "<group>";
 		};
+		33BFFC5C2B0DED15000F4270 /* AnimeDetails */ = {
+			isa = PBXGroup;
+			children = (
+				33BFFC5D2B0DED45000F4270 /* AnimeDetailsViewController.swift */,
+			);
+			path = AnimeDetails;
+			sourceTree = "<group>";
+		};
 		33E9BB4E2AD01EE600DBC8D5 = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 		33E9BB592AD01EE600DBC8D5 /* app */ = {
 			isa = PBXGroup;
 			children = (
+				33BFFC5C2B0DED15000F4270 /* AnimeDetails */,
 				3324005B2B0B699500D621C5 /* AnimeTable */,
 				33E9BB5A2AD01EE600DBC8D5 /* AppDelegate.swift */,
 				33E9BB5C2AD01EE600DBC8D5 /* SceneDelegate.swift */,
@@ -165,6 +176,7 @@
 				332400632B0B8D3200D621C5 /* AnimeTableView.swift in Sources */,
 				33E9BB5D2AD01EE600DBC8D5 /* SceneDelegate.swift in Sources */,
 				3324005F2B0B6A9400D621C5 /* AnimeService.swift in Sources */,
+				33BFFC5E2B0DED45000F4270 /* AnimeDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

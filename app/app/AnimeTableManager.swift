@@ -1,7 +1,13 @@
 import Foundation
 import UIKit
 
+protocol AnimeTableManagerDelegate {
+    func didSelectRow(_ animeModel: [String: Anime])
+}
+
+
 final class AnimeTableManager: NSObject {
+    var delegate: AnimeTableManagerDelegate?
     var animeData: [String: Anime] = [:]
 }
 
@@ -14,9 +20,16 @@ extension AnimeTableManager: UITableViewDataSource {
         let anime = Array(animeData.values)[indexPath.row]
         var cell = UITableViewCell()
         var configuration = cell.defaultContentConfiguration()
-        configuration.text = "\(anime.title) / \(anime.titleJapanese)\nMAL ID: \(anime.malId) / Genre: \(anime.genres?.first?.name ?? "N/A")"
-        configuration.secondaryText = anime.synopsis
+        configuration.text = "\(anime.title)"
+        configuration.secondaryText = "Genre: \(anime.genres?.first?.name ?? "N/A")"
         cell.contentConfiguration = configuration
         return cell
+    }
+}
+
+extension AnimeTableManager: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.didSelectRow(Array(arrayLiteral: animeData)[indexPath.row])
     }
 }
