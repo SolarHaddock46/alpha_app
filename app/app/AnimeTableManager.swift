@@ -1,7 +1,13 @@
 import Foundation
 import UIKit
 
+protocol AnimeTableManagerDelegate {
+    func didSelectRow(_ animeModel: [String: Anime])
+}
+
+
 final class AnimeTableManager: NSObject {
+    var delegate: AnimeTableManagerDelegate?
     var animeData: [String: Anime] = [:]
 }
 
@@ -18,5 +24,12 @@ extension AnimeTableManager: UITableViewDataSource {
         configuration.secondaryText = anime.synopsis
         cell.contentConfiguration = configuration
         return cell
+    }
+}
+
+extension AnimeTableManager: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        delegate?.didSelectRow(Array(arrayLiteral: animeData)[indexPath.row])
     }
 }

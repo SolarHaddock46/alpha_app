@@ -1,14 +1,21 @@
 import UIKit
 import Foundation
 
+protocol AnimeTableViewDelegate {
+    func didSelectRow(_ animeModel: [String: Anime])
+}
+
+
 final class AnimeTableView: UIView {
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.dataSource = tableManager as! any UITableViewDataSource
+        tableView.dataSource = tableManager
+        tableView.delegate = tableManager
         return tableView
     }()
     
     private lazy var tableManager = AnimeTableManager()
+    var delegate: AnimeTableViewDelegate?
     
     init() {
         super.init(frame: .zero)
@@ -26,6 +33,13 @@ final class AnimeTableView: UIView {
         tableView.reloadData()
     }
     
+}
+
+
+extension AnimeTableView: AnimeTableManagerDelegate {
+    func didSelectRow(_ animeModel: [String: Anime]) {
+        delegate?.didSelectRow(animeModel)
+    }
 }
 
 private extension AnimeTableView {

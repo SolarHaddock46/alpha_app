@@ -5,6 +5,7 @@ final class AnimeTableViewController: UIViewController {
     
     private lazy var contentView: AnimeTableView = {
         let view = AnimeTableView()
+        view.delegate = self
         return view
     }()
     
@@ -31,5 +32,11 @@ final class AnimeTableViewController: UIViewController {
                 self.contentView.configure(with: animes)
             }
         }
+    }
+}
+
+extension AnimeTableViewController: AnimeTableViewDelegate {
+    func didSelectRow(_ animeModel: [String: Anime]) {
+        
     }
 }
