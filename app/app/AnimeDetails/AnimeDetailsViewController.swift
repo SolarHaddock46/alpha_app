@@ -87,6 +87,6 @@ class AnimeDetailsViewController: UIViewController {
         }
         
         titleView.text = "\(anime.title)\n\(anime.titleJapanese)\nEpisodes: \(anime.episodes ?? 0)\nGenre: \(anime.genres?.first?.name ?? "N/A")\nDescription:"
-        synopsisView.text = anime.synopsis
+        synopsisView.text = "\(anime.synopsis ?? "N/A")"
     }
 }
